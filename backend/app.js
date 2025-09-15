@@ -11,12 +11,18 @@ connect();
 
 const app = express();
 
-
-app.use(cors({
-  origin: "https://aegis-e8cm.onrender.com/login ", // yaha apne frontend ka URL daalna
+pp.use(cors({
+  origin: [
+    "http://localhost:5173",          // local testing
+    "https://codemate.vercel.app"     // deployed frontend ka URL
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
-}));app.use(morgan('dev'));
+}));
+
+app.options("*", cors()); // preflight handle karega
+
+app.use(express.json());app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
