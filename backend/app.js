@@ -11,8 +11,12 @@ connect();
 
 const app = express();
 
-app.use(cors());
-app.use(morgan('dev'));
+
+app.use(cors({
+  origin: "http://localhost:5173", // yaha apne frontend ka URL daalna
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
