@@ -12,29 +12,29 @@ const Home = () => {
     const navigate = useNavigate()
 
     // ✅ Create project and navigate to /project with state
-    function createProject(e) {
-        e.preventDefault()
+   function createProject(e) {
+    e.preventDefault()
 
-        axios.post('/projects/create', {
-            name: projectName,
-        })
-        .then((res) => {
-            const newProject = res.data.project
-            console.log("Created Project:", newProject)
+    axios.post('/projects/create', {
+        name: projectName,
+    }, {
+        headers: {
+            Authorization: `Bearer ${user.token}`   // 👈 token add kiya
+        }
+    })
+    .then((res) => {
+        const newProject = res.data.project
+        console.log("Created Project:", newProject)
 
-            // ✅ Close modal
-            setIsModalOpen(false)
-            setProjectName("")
+        setIsModalOpen(false)
+        setProjectName("")
+        navigate('/project', { state: { project: newProject } })
+    })
+    .catch((error) => {
+        console.error("Error creating project:", error)
+    })
+}
 
-            // ✅ Navigate to Project screen
-            navigate('/project', {
-                state: { project: newProject }
-            })
-        })
-        .catch((error) => {
-            console.error("Error creating project:", error)
-        })
-    }
 
     // ✅ Fetch all projects
     useEffect(() => {
