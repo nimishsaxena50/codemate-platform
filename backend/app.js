@@ -13,7 +13,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: "http://localhost:5173", // yaha apne frontend ka URL daalna
+  origin: "https://aegis-e8cm.onrender.com/login ", // yaha apne frontend ka URL daalna
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));app.use(morgan('dev'));
